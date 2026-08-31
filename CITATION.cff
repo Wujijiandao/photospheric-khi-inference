@@ -28,3 +28,11 @@ preferred-citation:
       orcid: "https://orcid.org/0009-0000-3121-7972"
   title: "Subresolution Inference from Photospheric Kelvin--Helmholtz Modes: Closure Limits and Multimode Identifiability"
   year: 2026
+doi: "10.5281/zenodo.22208881"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22208881"
+    description: "Version 1.0.0 archival DOI"
+  - type: doi
+    value: "10.5281/zenodo.22208880"
+    description: "Concept DOI for all versions"
