@@ -1,0 +1,31 @@
+Repository name:
+photospheric-khi-inference
+
+Description:
+Reproducible theory and numerical tools for subresolution inference from photospheric Kelvin–Helmholtz modes, including MURaM stress tests and multimode recovery.
+
+Website:
+[add Zenodo concept DOI or manuscript URL after publication]
+
+Topics:
+solar-physics
+kelvin-helmholtz-instability
+dkist
+magnetohydrodynamics
+muram
+inverse-problems
+identifiability
+plasma-physics
+solar-photosphere
+multimode-inversion
+scientific-computing
+reproducible-research
+
+Default branch:
+main
+
+Release tag:
+v1.0.0
+
+Release title:
+v1.0.0 — First Archival Release

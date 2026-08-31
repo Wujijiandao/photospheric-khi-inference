@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the archived release and the accompanying manuscript."
+title: "Photospheric KHI Inference"
+type: software
+authors:
+  - family-names: Zhang
+    given-names: Yuzhan
+    orcid: "https://orcid.org/0009-0000-3121-7972"
+version: 1.0.0
+date-released: 2026-08-31
+repository-code: "https://github.com/Wujijiandao/photospheric-khi-inference"
+license: MIT
+keywords:
+  - Kelvin-Helmholtz instability
+  - solar photosphere
+  - DKIST
+  - magnetohydrodynamics
+  - MURaM
+  - inverse problems
+  - identifiability
+  - subresolution diagnostics
+  - multimode inversion
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Zhang
+      given-names: Yuzhan
+      orcid: "https://orcid.org/0009-0000-3121-7972"
+  title: "Subresolution Inference from Photospheric Kelvin--Helmholtz Modes: Closure Limits and Multimode Identifiability"
+  year: 2026

@@ -1,0 +1,32 @@
+Resource type: Software
+Title: Photospheric KHI Inference: Reproducibility Package for Subresolution Kelvin–Helmholtz Diagnostics
+Version: v1.0.0
+Publication date: 2026-08-31
+Creator: Yuzhan Zhang
+ORCID: 0009-0000-3121-7972
+License: MIT
+
+Description:
+Photospheric KHI Inference is the reproducibility package accompanying the manuscript “Subresolution Inference from Photospheric Kelvin–Helmholtz Modes: Closure Limits and Multimode Identifiability.” It provides finite-width Kelvin–Helmholtz instability solvers, fastest-mode and multimode inverse tools, identifiability diagnostics, a five-case stress test based on published MURaM quantities from Kuridze et al. (2026), smooth variable-density generalized-Rayleigh calculations, profile-family sensitivity tests, noisy synthetic recovery experiments, and the derived tables and figures used in the manuscript. The package is intended to quantify when resolved photospheric KH modes can constrain unresolved velocity-shear layers and to expose the closure assumptions required for event-level inference. No MURaM simulation cubes are redistributed or claimed to have been independently reanalyzed.
+
+Keywords:
+Kelvin-Helmholtz instability
+solar photosphere
+DKIST
+magnetohydrodynamics
+MURaM
+inverse problems
+identifiability
+subresolution diagnostics
+multimode inversion
+solar physics
+plasma instability
+
+Related identifier to add after manuscript has a DOI/arXiv record:
+- IsSupplementTo / IsSupplementedBy: manuscript DOI or arXiv URL
+
+GitHub repository:
+https://github.com/Wujijiandao/photospheric-khi-inference
+
+GitHub release/tag:
+v1.0.0
