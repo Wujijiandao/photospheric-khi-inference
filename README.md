@@ -6,6 +6,12 @@ The repository accompanies the manuscript:
 
 **Subresolution Inference from Photospheric Kelvin–Helmholtz Modes: Closure Limits and Multimode Identifiability**  
 Yuzhan Zhang
+- Version DOI: `10.5281/zenodo.22208881`
+- Concept DOI: `10.5281/zenodo.22208880`
+- ORCID: `0009-0000-3121-7972`
+
+Recommended exact citation:
+> Zhang, Y. (2026). *Photospheric KHI Inference* (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.22208881
 
 ## Scientific scope
 
