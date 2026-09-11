@@ -1,0 +1,367 @@
+\documentclass[linenumbers]{aastex7}
+\usepackage{amsmath}
+
+\shorttitle{Multimode KHI Shear-Layer Inference}
+\shortauthors{Zhang}
+
+\begin{document}
+
+\title{Inferring Unresolved Shear Layers from Kelvin--Helmholtz Modes: Image-Frame Multimode Identifiability and a Photospheric Stress Test}
+
+\correspondingauthor{Yuzhan Zhang}
+\author[0009-0000-3121-7972,gname='Yuzhan',sname='Zhang']{Yuzhan Zhang}
+\affiliation{Independent Researcher\\102, Unit 2, Building 5, South District, Bordeaux Community, Caiyu Town, Daxing District, Beijing 102606, China}
+\email[show]{wujijiandao2333@163.com}
+
+\begin{abstract}
+Resolved Kelvin--Helmholtz (KH) modes can encode scales that remain unresolved in the underlying shear layer, but extracting them is an inverse problem with frame and closure degeneracies. We derive an image-frame multimode inverse for a finite-width shear layer. One arbitrary mode is structurally non-identifying. Two signed modes generate two scale- and frame-free invariants that recover layer thickness and density contrast; velocity scale and center velocity then follow algebraically. Reparameterizing by wavenumber ratio and spectral position makes the uniqueness problem scale free. Across 206,640 Jacobian samples spanning $r=1.005$--10, $u=0.01$--0.99, and $\epsilon=0.01$--0.99, the determinant remains positive; multistart inversions at 1,701 additional targets find no separated second root, although sensitivity deteriorates for nearly coincident modes and near spectral boundaries. Signed propagation is essential because unsigned speeds can create discrete alternative solutions. For a representative $d=10$ km layer, Monte Carlo experiments with 2\% wavelength, 5\% growth-rate, and 3\% apparent-speed uncertainties recover $d=10.00^{+0.50}_{-0.48}$ km and the unknown center speed without material median bias. A third mode overdetermines the equilibrium and can diagnose closure error: smooth tanh, error-function, and arctangent layers can be fit exactly by two slab modes while biasing inferred thickness by 16--42\%, but a withheld third mode exposes a 2--4\% growth-rate inconsistency. Published DKIST/MURaM photospheric cases further show why a universal fastest-mode wavelength-to-thickness conversion is not calibrated event by event. Multimode KH observations can therefore support subresolution shear diagnostics while internally testing the assumed equilibrium.
+\end{abstract}
+
+\keywords{Solar photosphere; Solar atmospheric motions; Magnetohydrodynamics; Astrophysical fluid dynamics; Solar magnetic fields}
+
+\section{Introduction}
+Velocity-shear layers occur throughout geophysical and astrophysical fluids, but the equilibrium structures that control their stability are often thinner than the available spatial resolution. Kelvin--Helmholtz instability (KHI) offers a possible indirect diagnostic because the unstable spectrum depends on the shear thickness, velocity contrast, density structure, stratification, compressibility, and magnetic geometry. The forward stability problem is classical \citep{Chandrasekhar1961,Michalke1964,MiuraPritchett1982}; the inverse problem is less automatic. In particular, the existence of an observed wavelength does not by itself identify a unique shear thickness unless an additional mode-selection rule or equilibrium constraint is imposed.
+
+Using KH billows to estimate shear-layer scales has precedents outside solar physics. Atmospheric and oceanic studies have compared observed wavelengths, phase speeds, and growth with linear stability calculations to infer or check unresolved inversion and shear scales \citep[e.g.,][]{Nielsen1992}. Such applications also illustrate the central difficulty: a wavelength-to-thickness ratio is model dependent, and the most unstable mode need not be the only mode that reaches observable amplitude.
+
+The issue has become directly relevant to the solar photosphere. The Daniel K. Inouye Solar Telescope (DKIST) resolved ubiquitous KH-like vortices along photospheric magnetic-flux boundaries at an effective spatial resolution of about 19 km \citep{Kuridze2026}. The reported wavelengths span 25--170 km, with a characteristic scale near 65 km, while associated MURaM simulations contain velocity-shear layers with characteristic thicknesses near 12 km. \citet{Kuridze2026} compared measured wavelengths, growth rates, and phase speeds with a finite-width linear KHI model and found population-level consistency. Their phase-speed comparison required transforming the measured image-frame apparent speed to the shear-center frame through $v_{\rm ph}=v_{\rm app}-v_c$. The question addressed here is different from that forward, population-level comparison: whether a resolved KH spectrum contains enough independent information to identify a subresolution layer without imposing fastest-mode selection or externally supplying the frame velocity.
+
+Here we formulate that inverse problem in a way that does not require an externally measured $v_c$ when more than one KH mode is available. The primary question is general: what can one, two, or three unstable modes identify about an unresolved shear layer? We use the finite-width slab model as an analytically transparent reference and derive observables that eliminate both the velocity scale and the unknown image-frame offset. This yields a hierarchy: one arbitrary mode is structurally non-identifying; two modes can locally identify the basic layer parameters under a specified equilibrium family; and three or more modes overdetermine that family and therefore provide an internal closure test. We then quantify conditioning and noise sensitivity, deliberately generate profile mismatch with smooth shear layers, and finally use the five published synthetic MURaM cases of \citet{Kuridze2026} as an astrophysical stress test. The photospheric application therefore tests the general inverse framework rather than defining it.
+
+\section{Reference finite-width shear model}
+We adopt the incompressible finite-width model used in the DKIST interpretation, based on the classical treatment of \citet{Chandrasekhar1961},
+\begin{equation}
+(\rho,U)=
+\left\{
+\begin{array}{ll}
+(\rho_0(1+\epsilon),-U_0), & x<-d/2,\\
+(\rho_0,2U_0x/d), & |x|<d/2,\\
+(\rho_0(1-\epsilon),U_0), & x>d/2.
+\end{array}
+\right.
+\end{equation}
+Thus $\Delta U=2U_0$. Define $\kappa=kd$, $\nu=\gamma/(kU_0)$, and $q=1-\exp(-2\kappa)$. Taking the removable limits at $\nu=\pm1$, the published dispersion relation reduces algebraically to
+\begin{equation}
+A\nu^2+B\nu+C=0,
+\end{equation}
+where
+\begin{align}
+A&=\kappa^2\left(\frac{\epsilon^2q}{4}-1\right),\\
+B&=\epsilon\kappa q,\\
+C&=q+\kappa^2-2\kappa-\frac{\epsilon^2\kappa^2q}{4}.
+\end{align}
+For discriminant $D=B^2-4AC<0$, the unstable conjugate pair gives, with $\gamma=\gamma_{\rm r}-i\gamma_{\rm im}$,
+\begin{align}
+R(\kappa,\epsilon)\equiv\frac{v_{\rm ph}}{U_0}&=-\frac{B}{2A},\\
+I(\kappa,\epsilon)\equiv\frac{\gamma_{\rm im}}{kU_0}&=\frac{\sqrt{-D}}{2|A|},\\
+\frac{\gamma_{\rm im}d}{U_0}&=\kappa I.
+\end{align}
+The relation remains transcendental in $\kappa$ through $q$, but its complex-frequency root is explicit at fixed $\kappa$. The short-wave cutoff $\kappa_c(\epsilon)$ is defined by $D(\kappa_c,\epsilon)=0$.
+
+\section{Image-frame inversion from arbitrary modes}
+\subsection{One mode: structural non-identifiability}
+For a mode with observed wavenumber $k=2\pi/\lambda$, define
+\begin{equation}
+g\equiv\frac{\gamma_{\rm im}}{k}.
+\end{equation}
+The forward relations in the image frame are
+\begin{align}
+g &= U_0 I(kd,\epsilon),\\
+v_{\rm app} &= v_c+U_0R(kd,\epsilon).
+\end{align}
+Here $v_c$ is the velocity of the shear-layer center in the image coordinate used to measure propagation. For any trial $(d,\epsilon)$ that places the mode inside the unstable band, the first equation can be satisfied by
+\begin{equation}
+U_0=\frac{g}{I(kd,\epsilon)},
+\end{equation}
+and the second by
+\begin{equation}
+v_c=v_{\rm app}-U_0R(kd,\epsilon).
+\end{equation}
+Thus one arbitrary image-frame mode supplies no independent shape constraint on $(d,\epsilon)$ beyond model admissibility. This is stronger than the familiar one-dimensional degeneracy obtained when the shear-frame phase speed $v_{\rm ph}$ is already known: with unknown $v_c$, both shape parameters remain free.
+
+\subsection{Two modes: eliminating scale and frame}
+Consider two signed modes from the same equilibrium, measured along one common interface coordinate. For $j=1,2$,
+\begin{align}
+g_j &= U_0 I_j,\\
+v_{{\rm app},j}&=v_c+U_0R_j,
+\end{align}
+where $I_j=I(k_jd,\epsilon)$ and $R_j=R(k_jd,\epsilon)$. The common multiplicative velocity scale is removed by the growth-rate ratio,
+\begin{equation}
+Q_{12}\equiv \ln\frac{g_1}{g_2}
+=\ln\frac{I_1}{I_2},
+\end{equation}
+and the unknown frame velocity is removed by differencing the apparent speeds,
+\begin{equation}
+S_{12}\equiv\frac{v_{{\rm app},1}-v_{{\rm app},2}}{g_1}
+=\frac{R_1-R_2}{I_1}.
+\end{equation}
+Both $Q_{12}$ and $S_{12}$ depend only on $(d,\epsilon)$ for measured $(k_1,k_2)$. The two-mode image-frame inverse is therefore
+\begin{equation}
+(Q_{12},S_{12})=\mathbf{F}(d,\epsilon;k_1,k_2).
+\end{equation}
+Once $(d,\epsilon)$ is found,
+\begin{equation}
+U_0=\frac{g_j}{I_j},\qquad
+v_c=v_{{\rm app},j}-U_0R_j,
+\end{equation}
+with the two estimates combined in practice. The inversion requires signed apparent phase speeds; replacing them by absolute magnitudes destroys the common-frame differencing information.
+
+Local identifiability is governed by
+\begin{equation}
+J_{\rm img}=\frac{\partial(Q_{12},S_{12})}{\partial(\ln d,\epsilon)}.
+\end{equation}
+Whenever $\det J_{\rm img}\neq0$, the implicit-function theorem gives a locally unique $(d,\epsilon)$ solution. This is a local statement, not a theorem of global uniqueness for every mode pair.
+
+\subsection{Three or more modes: closure testing}
+For $n$ modes, choose mode 1 as a reference and form
+\begin{align}
+Q_{1j}&=\ln\frac{g_1}{g_j},\\
+S_{1j}&=\frac{v_{{\rm app},1}-v_{{\rm app},j}}{g_1},\qquad j=2,\ldots,n.
+\end{align}
+There are $2(n-1)$ scale- and frame-free invariants. A two-parameter equilibrium family is exactly closed by $n=2$ and overdetermined for $n\geq3$. A third mode therefore does more than improve precision: it can reveal that the assumed profile family is unable to reproduce all observed modes simultaneously.
+
+\section{Conditioning, global uniqueness tests, and noisy recovery}
+We first evaluate identifiability within the reference slab model. The representative truth is
+\begin{equation}
+d=10~{\rm km},\quad U_0=1.5~{\rm km~s^{-1}},\quad
+\epsilon=0.6,\quad v_c=1.2~{\rm km~s^{-1}}.
+\end{equation}
+Two modes are placed at $0.30\kappa_c$ and $0.85\kappa_c$ solely to span the unstable band in a controlled design. Their observables are
+\begin{align}
+(\lambda_1,\lambda_2)&=(152.93,53.98)~{\rm km},\\
+(\gamma_1,\gamma_2)&=(0.04112,0.04969)~{\rm s^{-1}},\\
+(v_{{\rm app},1},v_{{\rm app},2})&=(1.846,1.580)~{\rm km~s^{-1}}.
+\end{align}
+At the truth,
+\begin{equation}
+\det J_{\rm img}=1.681,
+\end{equation}
+and the singular values are 2.916 and 0.576, confirming local rank. Figure~\ref{fig:image-ident} scans pairs across the unstable band. Degeneracy strengthens as the two modes approach one another because they probe nearly the same local spectral response; separated modes generally supply more independent shape information.
+
+\begin{figure}
+\plotone{fig08_image_frame_identifiability.pdf}
+\caption{Two-mode image-frame identifiability at the representative $\epsilon=0.6$ truth. Color shows the logarithm of the smaller singular value of $J_{\rm img}$ as the two true wavenumbers are moved through the unstable band, expressed here as fractions of the true short-wave cutoff only for design visualization. The cross marks the pair used for the recovery experiment.}
+\label{fig:image-ident}
+\end{figure}
+
+\subsection{Scale-free global uniqueness tests}
+The local rank test does not exclude a second, distant solution. To examine the global branch structure without introducing an arbitrary length scale, fix the observed wavenumber ratio
+\begin{equation}
+r\equiv\frac{k_2}{k_1}>1
+\end{equation}
+and define the position of the shorter-wave mode within the unstable band by
+\begin{equation}
+u\equiv\frac{\kappa_2}{\kappa_c(\epsilon)}\in(0,1).
+\end{equation}
+Then $\kappa_2=u\kappa_c(\epsilon)$ and $\kappa_1=u\kappa_c(\epsilon)/r$, so for each fixed $r$ the two invariants define a dimensionless map
+\begin{equation}
+(Q_{12},S_{12})=\mathbf{G}_r(u,\epsilon).
+\end{equation}
+Once $(u,\epsilon)$ is recovered, the dimensional thickness follows directly from
+\begin{equation}
+d=\frac{u\kappa_c(\epsilon)}{r k_1}.
+\end{equation}
+Thus global uniqueness can be studied on the rectangular physical domain $(u,\epsilon)\in(0,1)^2$ independently of the true value of $d$.
+
+We numerically sample the Jacobian $J_{u\epsilon}=\partial(Q_{12},S_{12})/\partial(u,\epsilon)$ at 206,640 points covering $r=1.005$--10, $u=0.01$--0.99, and $\epsilon=0.01$--0.99. Its determinant is positive at every sampled point, with a minimum value $2.70\times10^{-7}$. This rules out a local fold on the scanned grid but is not, by itself, an analytic proof of global injectivity. We therefore also perform multistart inverse searches. A 729-target survey over $r=1.02$--8 and $u,\epsilon=0.05$--0.95, using 16 dispersed initial guesses per target, returns exactly one root in every case. A second edge-stress survey of 972 targets extending to $r=1.005$--10 and $u,\epsilon\in\{0.01,0.02,0.05,0.10,0.50,0.90,0.95,0.98,0.99\}$, using nine dispersed initial guesses, likewise finds no separated second root. We therefore find numerical global uniqueness throughout the tested reference-slab domain, while retaining the qualification that this is a finite numerical survey rather than a theorem for the continuum.
+
+Uniqueness does not imply useful conditioning. As $r\rightarrow1$, both invariants become first-order small because the two modes probe the same spectral point. At $u\rightarrow0$ the modes enter the long-wave asymptotic regime, whereas at $u\rightarrow1$ the shorter-wave mode approaches the stability cutoff. Figure~\ref{fig:global-atlas} maps the worst-case smaller singular value over density contrast. The most informative designs use spectrally separated modes away from both band edges; the extrema are numerically unique but can be observationally ill conditioned.
+
+\begin{figure}
+\plotone{fig10_global_uniqueness_atlas.pdf}
+\caption{Scale-free global conditioning atlas for the two-mode reference-slab inverse. For each wavenumber ratio $r$ and shorter-wave spectral position $u$, the color gives the minimum smaller singular value of $J_{u\epsilon}$ over $0.01\leq\epsilon\leq0.99$. Small values indicate weak absolute sensitivity. The map shows the loss of information for nearly coincident modes ($r\rightarrow1$) and the practical degradation near the long-wave and cutoff boundaries. This is a conditioning diagnostic, not a direct observational error forecast.}
+\label{fig:global-atlas}
+\end{figure}
+
+The signed-velocity requirement is also substantive. It does not require a privileged absolute direction on the sky, but both modes must be registered to one common oriented interface coordinate. In a synthetic example with the same $(d,U_0,\epsilon)=(10~{\rm km},1.5~{\rm km~s^{-1}},0.6)$ but $v_c=-0.3$ km s$^{-1}$, the true signed apparent speeds are 0.346 and 0.080 km s$^{-1}$. If only their magnitudes are retained, the correct $(+,+)$ assignment recovers the truth, but the alternative $(+,-)$ assignment also produces a mathematically valid slab solution: $d=10.95$ km, $\epsilon=0.804$, $U_0=1.74$ km s$^{-1}$, and $v_c=-0.674$ km s$^{-1}$. Unsigned speed magnitudes can therefore introduce a discrete branch ambiguity even where the signed inverse is numerically single-valued.
+
+We next perturb the observables independently with Gaussian errors. Wavelength uncertainties are fixed at 2\% and growth-rate uncertainties at 5\%; apparent-speed uncertainties are varied from 1\% to 5\%. For a 3\% apparent-speed uncertainty, 9997 of 10,000 draws satisfy the inversion tolerance and give
+\begin{align}
+d&=10.003^{+0.498}_{-0.485}~{\rm km},\\
+\epsilon&=0.602^{+0.108}_{-0.137},\\
+U_0&=1.506^{+0.115}_{-0.111}~{\rm km~s^{-1}},\\
+v_c&=1.198^{+0.139}_{-0.136}~{\rm km~s^{-1}},
+\end{align}
+where the intervals are the 16th--84th percentiles. Figure~\ref{fig:image-recovery} shows all three apparent-speed error levels. Thickness is particularly robust in this design; density contrast is more sensitive because it is encoded mainly through comparatively small spectral asymmetries.
+
+\begin{figure}
+\plotone{fig09_image_frame_recovery.pdf}
+\caption{Image-frame two-mode recovery without supplying $v_c$. Wavelength and growth-rate uncertainties are fixed at 2\% and 5\%, respectively; the horizontal axis gives the independent relative uncertainty assigned to each apparent phase speed. Points show medians and bars the 16th--84th percentiles.}
+\label{fig:image-recovery}
+\end{figure}
+
+This experiment is an identifiability test, not a DKIST error forecast. It assumes that both modes are co-spatial and coeval manifestations of one linear equilibrium, that their signed propagation directions are measured consistently, and that the reference model is correct.
+
+\section{Model mismatch and the role of a third mode}
+Structural identifiability under a model does not imply that the model is an accurate representation of the true layer. We test that distinction by generating three modes from smooth variable-density profiles,
+\begin{equation}
+U(x)=U_0 f(x/a),\qquad \rho(x)=\rho_0[1-\epsilon f(x/a)],
+\end{equation}
+where $f$ is $\tanh$, $\mathrm{erf}$, or $(2/\pi)\arctan$, each rescaled so that $d$ is the same 10--90\% velocity-transition width. The true parameters are again $d=10$ km, $U_0=1.5$ km s$^{-1}$, $\epsilon=0.6$, and $v_c=1.2$ km s$^{-1}$. We solve the generalized variable-density Rayleigh equation
+\begin{equation}
+(U-c)\left(\phi''+\frac{\rho'}{\rho}\phi'-k^2\phi\right)
+-\left(U''+\frac{\rho'}{\rho}U'\right)\phi=0
+\end{equation}
+by Chebyshev collocation \citep{Charru2011}. The three test wavelengths correspond to reference wavenumbers $0.30$, $0.60$, and $0.90\kappa_c$; this normalization only sets a common spectral span.
+
+We then deliberately fit only the outer two modes with the finite-slab image-frame inverse. Because two modes exactly close the two slab shape parameters, the fit can reproduce those invariants even when the profile family is wrong. Table~\ref{tab:mismatch} shows the resulting parameter bias. The inferred thickness is low by 16--19\% for the tanh and error-function layers and by 42\% for the broad-tailed arctangent layer. Thus two-mode identifiability removes the structural degeneracy but does not remove model-systematic error.
+
+The withheld middle mode provides an internal check. When predicted from the outer-pair slab fit, its growth rate misses the smooth-profile truth by 2.1--4.2\% in these experiments. A simultaneous three-mode fit leaves a nonzero invariant residual. Consequently, a third mode can distinguish ``parameters are identifiable within this model'' from ``this model is adequate for the layer,'' provided the observational precision is sufficient to resolve the closure residual.
+
+\begin{deluxetable*}{lrrrrrr}
+\tablecaption{Smooth-profile truth interpreted with a two-mode finite-slab inverse\label{tab:mismatch}}
+\tablehead{
+\colhead{Truth profile} & \colhead{$d_{\rm inv}$} & \colhead{$\epsilon_{\rm inv}$} &
+\colhead{$U_{0,\rm inv}$} & \colhead{$v_{c,\rm inv}$} &
+\colhead{$\Delta\gamma_2/\gamma_2$} & \colhead{$\|r_{3\rm m}\|$}\\
+& \colhead{(km)} && \colhead{(km s$^{-1}$)} & \colhead{(km s$^{-1}$)} & \colhead{(\%)} &
+}
+\startdata
+Tanh & 8.101 & 0.545 & 1.318 & 1.347 & +4.15 & 0.0393\\
+Error function & 8.378 & 0.509 & 1.304 & 1.405 & +4.20 & 0.0400\\
+Arctangent & 5.781 & 0.591 & 1.314 & 1.186 & +2.09 & 0.0211
+\enddata
+\tablecomments{All synthetic truths use $d=10$ km, $\epsilon=0.6$, $U_0=1.5$ km s$^{-1}$, and $v_c=1.2$ km s$^{-1}$. The outer two modes are fit exactly in the image-frame invariant space. $\Delta\gamma_2/\gamma_2$ is the prediction error for the withheld middle mode. $\|r_{3\rm m}\|$ is the residual norm when all three modes are fit simultaneously with the slab family.}
+\end{deluxetable*}
+
+\section{The fastest-growing mode as a special one-mode closure}
+A common way to close a one-mode inverse is to assume that the observed structure is the fastest-growing mode. Let $\kappa_\ast(\epsilon)$ maximize $\kappa I$ and define
+\begin{equation}
+L(\epsilon)=\frac{2\pi}{\kappa_\ast},\quad
+G(\epsilon)=\kappa_\ast I(\kappa_\ast,\epsilon),\quad
+R_\ast(\epsilon)=R(\kappa_\ast,\epsilon).
+\end{equation}
+Then
+\begin{equation}
+\lambda_\ast=Ld,\qquad
+\gamma_\ast=G\frac{U_0}{d},\qquad
+v_{\rm ph}=R_\ast U_0.
+\end{equation}
+The scale-free coordinate
+\begin{equation}
+\chi\equiv\frac{v_{\rm ph}}{\gamma_\ast\lambda_\ast}
+=\frac{R_\ast\kappa_\ast}{2\pi G}
+\end{equation}
+depends only on $\epsilon$ and is numerically monotonic for $0\leq\epsilon<1$. Hence a known shear-frame phase speed supplies a closed sequential inverse. Figures~\ref{fig:scalings} and \ref{fig:chi} show the calibration.
+
+\begin{figure}
+\plotone{fig01_fastest_mode.pdf}
+\caption{Fastest-mode scalings of the reference finite-width slab. The growth coefficient varies weakly with density contrast, while the wavelength and phase coefficient carry stronger $\epsilon$ dependence.}
+\label{fig:scalings}
+\end{figure}
+
+\begin{figure}
+\plotone{fig02_inverse_coordinate.pdf}
+\caption{Fastest-mode coordinate $\chi=v_{\rm ph}/(\gamma_\ast\lambda_\ast)$. It increases numerically from zero toward a supremum of approximately 0.236 as $\epsilon\rightarrow1$.}
+\label{fig:chi}
+\end{figure}
+
+As $\epsilon$ increases from zero toward one, $L$ decreases from 7.885 toward about 5.726. A 65 km structure identified with the fastest slab mode would therefore imply $d\simeq8.24$--11.35 km. This is a conditional conversion, not a universal KHI ruler. The ideal fastest-mode map is locally invertible throughout the scanned interval; its Jacobian factor is shown in Figure~\ref{fig:jac}.
+
+\begin{figure}
+\plotone{fig03_identifiability.pdf}
+\caption{Jacobian factor for the ideal fastest-mode map. Positivity over the numerical scan demonstrates local invertibility once the fastest-mode and shear-frame closures have been imposed.}
+\label{fig:jac}
+\end{figure}
+
+\section{Photospheric stress test with published MURaM cases}
+The DKIST discovery provides a useful astrophysical stress test because \citet{Kuridze2026} report five synthetic MURaM examples with measured wavelength, velocity jump, shear thickness, density ratio, growth rate, and phase speed. Table~\ref{tab:cases} lists only the quantities used here.
+
+\begin{deluxetable*}{ccccccc}
+\tablecaption{Published synthetic MURaM KHI cases used in the stress test\label{tab:cases}}
+\tablehead{
+\colhead{Case} & \colhead{$\lambda$} & \colhead{$d$} & \colhead{$\Delta U$} &
+\colhead{$\rho_1/\rho_2$} & \colhead{$\gamma$} & \colhead{$|v_{\rm ph}|$}\\
+& \colhead{(km)} & \colhead{(km)} & \colhead{(km s$^{-1}$)} &
+& \colhead{(s$^{-1}$)} & \colhead{(km s$^{-1}$)}
+}
+\startdata
+1 & 62 & 15 & 1.63 & 5.00 & 0.041 & 0.53\\
+2 & 93 & 10 & 4.87 & 5.50 & 0.027 & 1.29\\
+3 & 91 & 10 & 2.60 & 4.70 & 0.043 & 0.33\\
+4 & 57 & 13 & 1.84 & 2.75 & 0.049 & 2.63\\
+5 & 57 & 13 & 6.19 & 2.20 & 0.059 & 1.10
+\enddata
+\tablecomments{Values are transcribed from Extended Data Table 1 of \citet{Kuridze2026}. The present work does not remeasure them from the MURaM cubes.}
+\end{deluxetable*}
+
+The case test asks whether the published events satisfy the additional fastest-slab closure, not whether they are KH unstable in the full simulation. First, the measured wavelengths differ from the slab fastest wavelengths by factors of about 0.58--1.35. Second, cases 1, 4, and 5 have $\kappa_{\rm obs}>\kappa_c$ when their tabulated $d$ and density ratios are inserted into the reference slab, placing them 7.6--9.2\% beyond its short-wave cutoff (Figure~\ref{fig:mode-location}).
+
+\begin{figure}
+\plotone{fig05_muram_mode_location.pdf}
+\caption{Case-level reference-slab diagnostics for the five published synthetic MURaM examples. $\lambda_{\rm obs}/\lambda_\ast=1$ would identify the measured mode with the slab fastest mode. $\kappa_{\rm obs}/\kappa_c>1$ places a mode beyond the slab short-wave cutoff; this occurs for cases 1, 4, and 5.}
+\label{fig:mode-location}
+\end{figure}
+
+The fastest-manifold test is independently restrictive. The fastest slab family has $\sup\chi\simeq0.236$. Cases 2, 4, and 5 have $\chi_{\rm obs}/\chi_{\rm sup}=2.179$, 3.994, and 1.387, respectively, so no density contrast can place those triplets on the fastest-mode manifold (Figure~\ref{fig:chi-cases}). Only cases 1 and 3 admit the closed fastest inverse. Their inferred thicknesses are 10.34 and 12.31 km, compared with tabulated values 15 and 10 km; case 1 additionally requires an inferred density ratio near 32 rather than 5. The five cases therefore do not calibrate a universal event-level fastest-slab conversion.
+
+\begin{figure}
+\plotone{fig06_muram_chi_admissibility.pdf}
+\caption{Published case values expressed through the fastest-mode coordinate $\chi$. Cases 2, 4, and 5 lie above the supremum of the reference fastest-mode family.}
+\label{fig:chi-cases}
+\end{figure}
+
+\section{Smooth-profile sensitivity of the photospheric stress test}
+The failed slab cutoffs do not invalidate the KHI identification; they diagnose equilibrium mismatch. The MURaM shear profiles are smooth, whereas the analytic reference model joins a finite linear layer to constant outer flows. For equal density, a tanh layer has $\lambda_\ast/d\simeq6.424$ under the same 10--90\% thickness convention, compared with 7.885 for the slab. Interpreting the tanh fastest mode with the slab calibration would bias thickness low by about 18.5\% (Figure~\ref{fig:profile}).
+
+\begin{figure}
+\plotone{fig04_profile_systematic.pdf}
+\caption{Equal-density growth curves for the finite linear slab and hyperbolic-tangent profile, using the same 10--90\% thickness convention. Profile shape shifts the fastest wavelength calibration by about 18.5\%.}
+\label{fig:profile}
+\end{figure}
+
+Evaluating a smooth variable-density tanh model at the five published wavelengths makes all five linearly unstable. The predicted-to-measured growth-rate ratios are 0.52, 3.11, 1.08, 0.56, and 1.52. We then vary density-transition width and offset and add matched error-function and arctangent families, producing 11 smooth profiles. All 55 case--profile combinations remain unstable, but the growth envelopes do not collapse onto the observations. For cases 1--5, the model/observed growth ratios span 0.40--0.84, 2.58--3.41, 0.90--1.19, 0.29--0.92, and 0.93--2.60, respectively (Figure~\ref{fig:profile-family}). Profile shape is therefore a leading calibration coordinate but not an unrestricted fitting freedom; additional departures can include compressibility, magnetic tension, stratification, radiative formation, nonlinear evolution, and the operational definition of the measured growth interval \citep{MiuraPritchett1982}.
+
+\begin{figure}
+\plotone{fig07_profile_family_sensitivity.pdf}
+\caption{Growth-rate sensitivity across 11 smooth velocity/density profile models for the five published synthetic MURaM cases. Points show medians and bars the full profile-family range. Profile variation removes the reference-slab false stability but does not eliminate the systematic growth discrepancies of cases 2 and 4.}
+\label{fig:profile-family}
+\end{figure}
+
+\section{Discussion}
+The inverse hierarchy is the main result. One arbitrary image-frame KH mode cannot identify the shear-layer shape because its growth fixes only a velocity scale after $(d,\epsilon)$ are chosen, while its apparent phase speed fixes the otherwise free frame velocity. Two modes change the problem qualitatively: ratios and differences eliminate both nuisance scales, leaving two observables for the two reference shape parameters. Three modes change it again: the model becomes overdetermined, creating an internal test of closure.
+
+This hierarchy clarifies the role of the commonly used fastest-growing-mode assumption. Fastest-mode selection is not wrong as a physical hypothesis; it is an additional equation. It can close a one-mode inverse, but it should be tested rather than silently identified with every visible vortex spacing. The published photospheric MURaM examples demonstrate why: several events are not compatible with the finite-slab fastest manifold even though the underlying simulation unquestionably develops KHI. Smooth profiles repair the qualitative short-wave instability but do not erase the quantitative discrepancies.
+
+The image-frame construction also changes an observational limitation into a measurable nuisance parameter. \citet{Kuridze2026} subtract the shear-center velocity from the apparent motion before comparing with linear theory. For two co-spatial modes, that external step is unnecessary in principle because the common $v_c$ cancels from $v_{{\rm app},1}-v_{{\rm app},2}$. The inverse then returns $v_c$ alongside the physical layer parameters. The global numerical tests strengthen the local result: no separated alternative root was found in either the broad interior survey or the edge-stress survey of the reference slab. This should be read as numerical evidence for a single inverse branch, not as an analytic global-inversion theorem. Practical information still vanishes when two modes become spectrally indistinguishable and degrades near the unstable-band boundaries.
+
+The phase speeds must also be signed along the same interface coordinate. The explicit unsigned-speed counterexample shows why: removing propagation direction can create a discrete alternative solution with different $d$, $\epsilon$, $U_0$, and $v_c$ even though the corresponding signed problem has a single numerical branch. The relevant requirement is consistent orientation, not a particular absolute choice of positive direction. The modes must additionally sample one quasi-stationary linear equilibrium.
+
+The controlled profile-mismatch experiment sets an equally important boundary. A perfectly conditioned two-mode inverse can still be systematically wrong if the equilibrium family is wrong. In our test, two slab modes exactly fit smooth-profile invariants while producing thickness biases as large as 42\%. A third mode exposes only a few-percent growth inconsistency, so closure discrimination can demand higher precision than basic thickness recovery. This separation between structural identifiability and model adequacy is central to any future ``KHI seismology'' application.
+
+For the photosphere, magnetic fields, compressibility, vertical stratification, and radiative transfer should therefore enter as calibration coordinates rather than as afterthoughts. Finite-thickness compressible MHD KHI has long been established \citep{MiuraPritchett1982}, and photospheric magnetic shear-flow stability also has substantial precedent \citep{Karpen1993,Kolesnikov2004}. The present contribution is not a claim of a new KHI mechanism. It is an inverse framework showing what mode multiplicity can and cannot identify, and how additional modes can test the assumed equilibrium before subresolution parameters are interpreted physically.
+
+A direct full-cube MURaM reanalysis would be valuable for operational calibration but is not required for the identifiability result. The present MURaM comparison is deliberately restricted to the published case values. A future application can extract local $U(x)$, $\rho(x)$, and magnetic profiles and replace the two-parameter slab response with a richer forward family; the same invariant logic continues to separate common velocity scale and image-frame offset from spectral shape.
+
+\section{Conclusions}
+We obtain seven principal results.
+
+(1) For one arbitrary KH mode observed in the image frame with unknown layer-center velocity, $(d,\epsilon)$ are structurally non-identifiable: any admissible pair can be accompanied by a corresponding $U_0$ and $v_c$.
+
+(2) Two signed modes from one equilibrium generate two scale- and frame-free invariants, $Q_{12}$ and $S_{12}$. Wherever the associated Jacobian is nonsingular, they locally recover $(d,\epsilon)$; $U_0$ and $v_c$ then follow algebraically. No independent measurement of $v_c$ is required.
+
+(3) Reparameterizing the two-mode problem by $(r,u,\epsilon)$ makes its branch structure scale free. Across 206,640 Jacobian samples the determinant remains positive, and two multistart surveys totaling 1,701 synthetic targets find no separated second root. The reference-slab inverse is therefore numerically single-branched over the tested domain, although conditioning degrades for nearly coincident modes and near spectral boundaries.
+
+(4) Signed propagation is an identifiability requirement. If only apparent-speed magnitudes are retained, alternative sign assignments can generate discrete parameter branches even when the signed inverse is numerically unique.
+
+(5) In a representative $d=10$ km experiment, 2\% wavelength, 5\% growth-rate, and 3\% apparent-speed errors recover $d=10.00^{+0.50}_{-0.48}$ km, while simultaneously recovering density contrast, shear velocity scale, and the unknown image-frame offset with unbiased medians.
+
+(6) Two-mode identifiability is model conditional. Smooth-profile synthetic modes interpreted with a finite slab give 16--42\% thickness biases despite exact two-mode closure, while a third mode overdetermines the two-parameter family and exposes a 2--4\% growth-rate inconsistency.
+
+(7) The published DKIST/MURaM photospheric cases illustrate the practical need for that hierarchy: several cases cannot be represented by the finite-slab fastest-mode closure, although smooth profiles restore instability at their wavelengths.
+
+Resolved KH spectra can therefore act as subresolution diagnostics without assuming a universal wavelength-to-thickness conversion. The robust route is multimode inference in a common signed image-frame coordinate, explicit conditioning checks, and closure testing with additional modes or independent physical constraints.
+
+\begin{acknowledgments}
+The observational and MURaM quantities used for the photospheric stress test are taken from \citet{Kuridze2026}; the author did not generate those simulations. OpenAI ChatGPT \citep{OpenAI2026} was used under author supervision for computational prototyping, code assistance, manuscript drafting/editing, and language refinement. The author takes full responsibility for the derivations, numerical results, citations, figures, and scientific claims in the submitted manuscript.
+\end{acknowledgments}
+
+\facility{DKIST}
+\software{NumPy 2.3.5; SciPy 1.17.0; Matplotlib 3.10.8}
+
+\section*{Data and Code Availability}
+The DKIST and MURaM datasets underlying the photospheric comparison are publicly available from the repositories cited by \citet{Kuridze2026}. The five case values used here are transcribed from their Extended Data Table 1. The public \emph{Photospheric KHI Inference} repository and its archived version 1.0.0 \citep{Zhang2026Software} contain the baseline calculations. The complete scripts and derived tables supporting the new image-frame multimode, global-uniqueness, noisy-recovery, and three-mode closure tests are contained in the versioned reproducibility package prepared with this submission. A new persistent software release will be archived before publication; the final accepted manuscript will cite that exact version-specific DOI.
+
+\bibliographystyle{aasjournalv7.1}
+\bibliography{references}
+\end{document}

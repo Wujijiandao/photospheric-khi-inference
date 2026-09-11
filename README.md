@@ -1,87 +1,61 @@
 # Photospheric KHI Inference
 
-Reproducible theory and numerical tools for subresolution inference from photospheric Kelvin–Helmholtz (KH) modes, developed in response to the DKIST observations reported by Kuridze et al. (2026).
+Reproducibility package for **image-frame multimode inference from Kelvin-Helmholtz modes**, with the DKIST/MURaM photospheric detections used as an astrophysical stress test.
 
-The repository accompanies the manuscript:
+Accompanying revised manuscript:
 
-**Subresolution Inference from Photospheric Kelvin–Helmholtz Modes: Closure Limits and Multimode Identifiability**  
-Yuzhan Zhang
-- Version DOI: `10.5281/zenodo.22208881`
-- Concept DOI: `10.5281/zenodo.22208880`
-- ORCID: `0009-0000-3121-7972`
+**Inferring Unresolved Shear Layers from Kelvin-Helmholtz Modes: Image-Frame Multimode Identifiability and a Photospheric Stress Test**  
+Yuzhan Zhang — ORCID 0009-0000-3121-7972
 
-Recommended exact citation:
-> Zhang, Y. (2026). *Photospheric KHI Inference* (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.22208881
+## What is new in v1.1.0
 
-## Scientific scope
+The central inverse no longer assumes that the layer-center velocity is independently measured.
 
-The project asks when resolved photospheric KH modes can constrain unresolved velocity-shear layers. It contains:
+For two **signed** modes from the same equilibrium,
 
-- a closed finite-width slab dispersion relation and fastest-mode inversion;
-- local identifiability and reference-frame degeneracy diagnostics;
-- a five-case stress test using values transcribed from Extended Data Table 1 of Kuridze et al. (2026);
-- smooth-profile and variable-density Rayleigh sensitivity calculations;
-- profile-family sensitivity tests;
-- arbitrary-mode and two-mode inversion tools;
-- noisy synthetic recovery tests for multimode inference.
+- growth-rate ratios eliminate the common velocity scale;
+- apparent-speed differences eliminate the unknown image-frame offset;
+- two scale- and frame-free invariants recover shear thickness and density contrast under the reference model;
+- the velocity scale and layer-center speed then follow algebraically.
 
-The main conclusion is deliberately conditional: resolved KH modes can carry subresolution information, but a universal fastest-mode wavelength-to-thickness conversion is not calibrated at event level. Profile calibration, shear-frame velocity information, or multiple modes are needed for robust inference.
+The release also adds a scale-free global branch test. Using `r=k2/k1` and `u=kappa2/kappa_c`, the reference-slab inverse was scanned at 206,640 Jacobian points over `r=1.005–10`, `u=0.01–0.99`, and `epsilon=0.01–0.99`; the determinant remained positive throughout the sampled grid. Two independent multistart inverse surveys totaling 1,701 targets found no separated second root. These are numerical global-uniqueness tests, not an analytic theorem.
 
-## Repository layout
+Practical conditioning still deteriorates for nearly coincident modes and near the unstable-band edges. Propagation direction must also be retained: a controlled counterexample shows that unsigned apparent-speed magnitudes can create a discrete alternative inverse branch.
+
+A third mode overdetermines a two-parameter equilibrium family and becomes an internal closure test. Controlled smooth-profile experiments show that two modes can be structurally identifiable yet model-biased, while a withheld third mode exposes the mismatch.
+
+## Layout
 
 ```text
-src/                         Core numerical solvers
-scripts/                     Reproduction drivers and checks
-data/                        Published case values transcribed from Kuridze et al. (2026)
-results/derived_tables/      Derived numerical tables
-figures/                     Manuscript figures
-paper/                       Manuscript source and preprint snapshot
+src/                      Core finite-slab and smooth-profile solvers
+scripts/                  Reproduction drivers
+data/                     Published case values transcribed from Kuridze et al. (2026)
+results/derived_tables/   Numerical outputs
+figures/                  Manuscript vector figures
+paper/                    Revised manuscript source and checked preview
 ```
 
-## Installation
-
-Python 3.11 or newer is recommended.
+## Main reproduction commands
 
 ```bash
-python -m venv .venv
-# Windows PowerShell
-.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+python scripts/image_frame_multimode_analysis.py
+python scripts/global_uniqueness_analysis.py --atlas --roots
+python scripts/profile_mismatch_multimode.py
+python scripts/muram_stress_test.py
 ```
 
-On macOS/Linux:
-
-```bash
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-## Quick checks
-
-```bash
-python scripts/smoke_test.py
-python scripts/reproduce_baseline.py
-python scripts/reproduce_multimode_example.py
-```
-
-The committed CSV/PDF outputs correspond to the manuscript calculations. The scripts are intended to expose the numerical definitions and make the main calculations straightforward to reproduce; exact floating-point values can vary slightly with platform and dependency versions.
+The Monte Carlo and global multistart suites may take several minutes depending on hardware.
 
 ## Data provenance
 
-`data/nature_extended_table1_*.csv` contains numerical values transcribed from Extended Data Table 1 of:
+The small `nature_extended_table1_*.csv` files contain values transcribed from Extended Data Table 1 of Kuridze et al. (2026), *Nature* 656, 595-601, DOI 10.1038/s41586-026-10871-3. No MURaM simulation cubes are redistributed or claimed to have been independently reanalysed.
 
-Kuridze, D. et al. (2026), *Nature*, **656**, 595–601, “Ubiquitous Kelvin–Helmholtz instabilities driving plasma mixing on the Sun.” DOI: 10.1038/s41586-026-10871-3.
+## Versioning
 
-No MURaM simulation cubes are redistributed here, and this repository does not claim a new cube-level reanalysis. The large public DKIST/MURaM data remain available from the repositories cited by Kuridze et al. (2026).
-
-## Reproducibility boundary
-
-The five-case MURaM comparison in the manuscript is a published-value stress test, not a blind extraction from the full radiation-MHD cubes. Smooth-profile calculations are sensitivity models and should not be interpreted as fits to the local MURaM equilibrium profiles.
-
-## Citation
-
-If you use this repository, cite the archived release DOI once available. GitHub also reads the included `CITATION.cff` file.
+- Existing archival release: v1.0.0, DOI 10.5281/zenodo.22208881
+- All-versions concept DOI: 10.5281/zenodo.22208880
+- This package prepares **v1.1.0**. After publishing the GitHub release, use the newly minted Zenodo version-specific DOI in the revised manuscript.
 
 ## License
 
-Code is released under the MIT License. The manuscript and figures remain scholarly works of the author; third-party numerical values retain the provenance stated above.
+Code is MIT licensed. Third-party numerical values retain their cited provenance.

@@ -6,33 +6,24 @@ authors:
   - family-names: Zhang
     given-names: Yuzhan
     orcid: "https://orcid.org/0009-0000-3121-7972"
-version: 1.0.0
-date-released: 2026-08-31
+version: 1.1.0
+date-released: 2026-09-11
 repository-code: "https://github.com/Wujijiandao/photospheric-khi-inference"
 license: MIT
 keywords:
   - Kelvin-Helmholtz instability
+  - inverse problems
+  - multimode inference
+  - identifiability
   - solar photosphere
   - DKIST
-  - magnetohydrodynamics
   - MURaM
-  - inverse problems
-  - identifiability
-  - subresolution diagnostics
-  - multimode inversion
+  - magnetohydrodynamics
 preferred-citation:
   type: article
   authors:
     - family-names: Zhang
       given-names: Yuzhan
       orcid: "https://orcid.org/0009-0000-3121-7972"
-  title: "Subresolution Inference from Photospheric Kelvin--Helmholtz Modes: Closure Limits and Multimode Identifiability"
+  title: "Inferring Unresolved Shear Layers from Kelvin--Helmholtz Modes: Image-Frame Multimode Identifiability and a Photospheric Stress Test"
   year: 2026
-doi: "10.5281/zenodo.22208881"
-identifiers:
-  - type: doi
-    value: "10.5281/zenodo.22208881"
-    description: "Version 1.0.0 archival DOI"
-  - type: doi
-    value: "10.5281/zenodo.22208880"
-    description: "Concept DOI for all versions"

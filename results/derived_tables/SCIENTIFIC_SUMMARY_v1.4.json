@@ -1,0 +1,78 @@
+{
+  "version": "v1.4",
+  "global_scan": {
+    "jacobian_points": 206640,
+    "r_range": [
+      1.005,
+      10.0
+    ],
+    "u_range": [
+      0.01,
+      0.99
+    ],
+    "epsilon_range": [
+      0.01,
+      0.99
+    ],
+    "min_determinant": 2.697962375446049e-07,
+    "positive_determinant_fraction": 1.0,
+    "practical_multistart_unique": 729,
+    "practical_multistart_total": 729,
+    "edge_multistart_unique": 972,
+    "edge_multistart_total": 972,
+    "claim_boundary": "numerical global uniqueness over the scanned finite-slab domain; not an analytic theorem"
+  },
+  "representative_recovery_sigma_vapp_0.03": {
+    "sigma_lambda_rel": 0.02,
+    "sigma_gamma_rel": 0.05,
+    "sigma_vapp_rel": 0.03,
+    "accepted": 9997.0,
+    "rejected": 3.0,
+    "d_km_q16": 9.517819137257009,
+    "d_km_median": 10.002700771170156,
+    "d_km_q84": 10.500204729423643,
+    "epsilon_q16": 0.4656452557854023,
+    "epsilon_median": 0.6023458916959338,
+    "epsilon_q84": 0.7101420403286504,
+    "U0_km_s_q16": 1.3950084529839348,
+    "U0_km_s_median": 1.5061456214674895,
+    "U0_km_s_q84": 1.6208582544353154,
+    "vc_km_s_q16": 1.061641827804467,
+    "vc_km_s_median": 1.197610712437327,
+    "vc_km_s_q84": 1.3364178355174312
+  },
+  "unsigned_speed_alternative_branch": {
+    "true": {
+      "d_km": 10.0,
+      "epsilon": 0.6,
+      "U0_km_s": 1.5,
+      "vc_km_s": -0.3
+    },
+    "alternative": {
+      "d_km": 10.95312093459073,
+      "epsilon": 0.8040191192170881,
+      "U0_km_s": 1.7402601975656762,
+      "vc_km_s": -0.6741457649593663
+    }
+  },
+  "profile_mismatch": [
+    {
+      "profile": "tanh",
+      "d_bias_percent": -18.99026845771431,
+      "middle_gamma_error_percent": 4.148180408971913,
+      "three_mode_invariant_residual": 0.0392753388874554
+    },
+    {
+      "profile": "erf",
+      "d_bias_percent": -16.220781864401378,
+      "middle_gamma_error_percent": 4.201142439739747,
+      "three_mode_invariant_residual": 0.0399726518259602
+    },
+    {
+      "profile": "arctan",
+      "d_bias_percent": -42.18882140013087,
+      "middle_gamma_error_percent": 2.093201363204411,
+      "three_mode_invariant_residual": 0.02111907886146
+    }
+  ]
+}

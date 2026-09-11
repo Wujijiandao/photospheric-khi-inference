@@ -1,0 +1,5 @@
+metric,value
+minimum determinant on scanned domain,2.697962375446049e-07
+minimum sigma_min on scanned domain,6.307752967956337e-05
+maximum condition number on scanned domain,1075.597282411829
+fraction of scan points with positive determinant,1.0
